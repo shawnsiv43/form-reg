@@ -1,0 +1,132 @@
+const Form=document.getElementById('register');
+const usernameCheck=document.getElementById('username');
+const emailCheck=document.getElementById('email');
+const passwordCheck=document.getElementById('password');
+const conPassword=document.getElementById('confirm-password');
+const resultDiv=document.getElementById('endResult')
+const ageCheck=document.getElementById('age')
+alert(ageCheck)
+Form.addEventListener('submit',validator);
+function showError(input,msg){
+    debugger;
+    const formElement=input.parentElement;
+    formElement.className="form-element error";
+    const small=formElement.querySelector("small");
+    small.innerText=msg
+}
+function showsuccess(input){
+    const formElement=input.parentElement
+    formElement.className="form-element success"
+}
+
+
+
+function validator(e){
+    e.preventDefault();
+    debugger;
+    resultDiv.textContent=""
+    let con=false
+    let em=false
+    let pass=false
+    let user=false
+    let ageFlag=false
+    user=usernameValid((usernameCheck),3,25)
+    em=emailCheckings(emailCheck)
+    pass=passwordValid(passwordCheck,6,25)
+    con=cValid((conPassword))
+    ageFlag=validAge(ageCheck,10,80)
+
+
+    if (user && em && pass && con && ageFlag ){
+    username=usernameCheck.value;
+    eName=emailCheck.value
+    passName=passwordCheck.value
+    cpassName=conPassword.value
+    ageName=ageCheck.value
+        fetch("/api/happy?uName="+encodeURIComponent(username)+"&eName="+encodeURIComponent(eName)+"&passName="+encodeURIComponent(passName)+"&cpassName="+encodeURIComponent(cpassName)+"&ageName="+encodeURIComponent(ageName))
+            .then(function(response){
+                return response.json()
+            })
+            .then(function(data){
+                resultDiv.textContent=data.regMsg;
+            })
+
+}
+
+
+}
+function emailCheckings(emailVal){
+    emailVal=emailVal.value
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if(emailVal===""){
+        showError(emailCheck,'Email can\' be balnk')
+        return false
+    }
+    else if (emailRegex.test(emailVal)){
+        showsuccess(emailCheck)
+        return true
+    }
+    
+}
+function validAge(input,min,max){
+    if(parseInt(input.value)<min){
+        showError(input,'Age must 10 or greater')
+        return false
+    }else if (parseInt(input.value)>max){
+        showError(input,'Bro you know that you\'re a Grandpa/Grandma. Enjoy your life')
+        return false
+    }else{
+        showsuccess(input)
+        return true
+    }
+}
+function usernameValid(input,min,max){
+    if(input.value===""){
+        showError(input,'Username can\' be blank')
+        return false
+    }
+    else if(input.value.length<min){
+        showError(input,'Username must be at least 3')
+        return false
+    }
+    else if(input.value.length>max){
+        showError(input,'Username is at most 25')
+        return false
+}
+else{
+    showsuccess(input)
+    return true
+}
+}
+function passwordValid(input,min,max){
+    if(input.value===""){
+        showError(input,'Password can\' be blank')
+        return false
+    }
+    else if(input.value.length<min){
+        showError(input,'Password can\' be blank')
+        return false
+    }
+    else if(input.value.length>max){
+        showError(input,'Password can\' be blank')
+        return false
+    }
+    else{
+        showsuccess(input)
+        return true
+    }
+}
+function cValid(input){
+    if(input.value===""){
+        showError(input,'Confirm password can\' be blank')
+        return false  
+    }
+    else if(input.value!==passwordCheck.value.trim()){
+        showError(input,'Confirm password can\' be blank')
+        return false
+    }
+    else{
+        showsuccess(input)
+        return true
+    }
+}

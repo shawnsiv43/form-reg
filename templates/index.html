@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dark Mode Toggle</title>
+    <script src="{{ url_for('static', filename='script10.js') }}" defer></script>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="container">
+        <form id="register">
+            <h1>Register</h1>
+            <div class="form-group">
+                <div class="form-element">
+                    <label for="username">Username</label><br>
+                    <input type="text" id="username" name="Username" placeholder="Enter Username"><br>
+                    <small></small>
+                </div>
+                <div class="form-element">
+                    <label for="email">Email</label><br>
+                    <input type="text" id="email" placeholder="Enter Email"><br>
+                    <small></small>
+                </div>
+                <div class="form-element">
+                    <label for="age">Age</label><br>
+                    <input type="number" id="age" placeholder="Enter age">
+                    <small></small>
+                </div>
+                <div class="form-element">
+                    <label for="password">Password</label><br>
+                    <input type="text" id="password" placeholder="Enter Password"><br>
+                    <small></small>
+                </div>
+                <div class="form-element">
+                    <label for="confirm-password">Confirm Password</label><br>
+                    <input type="text" id="confirm-password" placeholder="Confirm Password"><br>
+                    <small></small>
+                </div>
+                <input type="submit" id="register-btn" value="Register"><br>
+        </form>
+        <div id="endResult"></div>
+
+    </div>
+</body>
+</html>
