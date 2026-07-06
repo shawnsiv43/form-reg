@@ -5,7 +5,7 @@ app=Flask(__name__)
 @app.route("/regform")
 def dis():
     return render_template("index.html")
-
+#api name will be changed later
 @app.route("/api/happy")
 def diss():
     uName=request.args.get("uName")
