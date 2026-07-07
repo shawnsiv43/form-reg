@@ -43,7 +43,7 @@ function validator(e){
     passName=passwordCheck.value
     cpassName=conPassword.value
     ageName=ageCheck.value
-        fetch("/api/happy?uName="+encodeURIComponent(username)+"&eName="+encodeURIComponent(eName)+"&passName="+encodeURIComponent(passName)+"&cpassName="+encodeURIComponent(cpassName)+"&ageName="+encodeURIComponent(ageName))
+        fetch("/api/reg?uName="+encodeURIComponent(username)+"&eName="+encodeURIComponent(eName)+"&passName="+encodeURIComponent(passName)+"&cpassName="+encodeURIComponent(cpassName)+"&ageName="+encodeURIComponent(ageName))
             .then(function(response){
                 return response.json()
             })
@@ -104,11 +104,11 @@ function passwordValid(input,min,max){
         return false
     }
     else if(input.value.length<min){
-        showError(input,'Password can\' be blank')
+        showError(input,'Password must be at least 6 characters')
         return false
     }
     else if(input.value.length>max){
-        showError(input,'Password can\' be blank')
+        showError(input,'Password can\'t is at most 25 characters ')
         return false
     }
     else{
@@ -122,7 +122,7 @@ function cValid(input){
         return false  
     }
     else if(input.value!==passwordCheck.value.trim()){
-        showError(input,'Confirm password can\' be blank')
+        showError(input,'Confirm password must be the same as password')
         return false
     }
     else{
