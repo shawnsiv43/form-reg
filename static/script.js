@@ -5,7 +5,6 @@ const passwordCheck=document.getElementById('password');
 const conPassword=document.getElementById('confirm-password');
 const resultDiv=document.getElementById('endResult')
 const ageCheck=document.getElementById('age')
-alert(ageCheck)
 Form.addEventListener('submit',validator);
 function showError(input,msg){
     debugger;
