@@ -7,7 +7,6 @@ const resultDiv=document.getElementById('endResult')
 const ageCheck=document.getElementById('age')
 Form.addEventListener('submit',validator);
 function showError(input,msg){
-    debugger;
     const formElement=input.parentElement;
     formElement.className="form-element error";
     const small=formElement.querySelector("small");
@@ -22,7 +21,6 @@ function showsuccess(input){
 
 function validator(e){
     e.preventDefault();
-    debugger;
     resultDiv.textContent=""
     let con=false
     let em=false
@@ -37,6 +35,7 @@ function validator(e){
 
 
     if (user && em && pass && con && ageFlag ){
+    debugger
     username=usernameCheck.value;
     eName=emailCheck.value
     passName=passwordCheck.value
@@ -48,6 +47,24 @@ function validator(e){
             })
             .then(function(data){
                 resultDiv.textContent=data.regMsg;
+                if (data.regMsg===`Your Registration has been ${username}, ${eName}, ${passName}, ${cpassName}, ${ageName}` & !data.error){
+                    let isSuccess="Successfully registered. Saved to the database"
+                    // fetch("/success?isSuccess="+encodeURIComponent(isSuccess))
+                    //     .then(function(response){
+                    //         return response
+                    //     })
+                    window.location.href="/success?isSuccess="+encodeURIComponent(isSuccess)
+                }
+                else{
+                    let isSuccess=`Regestration has failed on Primary Key constraint on the username:  ${username} `
+                    // fetch("/success?isSuccess="+encodeURIComponent(isSuccess))
+                    //     .then(function(response){
+                    //         return response
+                    //     })
+                    //showError(usernameCheck,"Primary key constraint")
+                    window.location.href="/success?isSuccess="+encodeURIComponent(isSuccess)
+
+                }
             })
 
 }
