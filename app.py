@@ -108,7 +108,7 @@ def update(username):
     print("Shawn")
     print(request.method)
     print(username)
-
+    yes=False
 
 
     print("Mmarcus")
@@ -124,7 +124,7 @@ def update(username):
             sql_query="""Update info
             Set email=?,
             age=?,
-            password=?,
+            password=? 
             Where username=?"""
             conn.execute(sql_query,(data["email"],data["age"],data["password"],username))
             conn.commit()
@@ -139,6 +139,7 @@ def update(username):
     return render_template(
         'form.html',
         user=user,
+        yes=True,
         error=None
     )
 

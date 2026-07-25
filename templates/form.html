@@ -9,7 +9,7 @@
 </head>
 <body>
     <div class="container">
-        <form id="register" method="POST">
+        <form id="register">
             <h1>Register</h1>
             <div class="form-group">
                 <div class="form-element">
@@ -34,8 +34,10 @@
                 </div>
                 <div class="form-element">
                     <label for="confirm-password">Confirm Password</label><br>
-                    <input type="text" id="confirm-password" name="confirmpassword" value="{{user.confirmpassword if user else ''}}"><br>
-                    <small></small>
+                    {% if yes!=False %}
+                        <input type="text" id="confirm-password" name="confirmpassword" value="{{user.confirmpassword if user else ''}}"><br>
+                        <small></small>
+                    {% endif %}
                 </div>
                 <button id="submit-btn" type="submit">Save</button>
                 <br>

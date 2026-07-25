@@ -77,7 +77,7 @@ function validator(e){
     const payload = {
         email: emailCheck.value,
         age: ageCheck.value,
-        password: passwordCheck.value,
+        password: passwordCheck.value
         // Add any other variables you need to send to the backend here
     };
 
