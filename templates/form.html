@@ -14,7 +14,7 @@
             <div class="form-group">
                 <div class="form-element">
                     <label for="username">Username</label><br>
-                    <input type="text" id="username" name="Username" value="{{user.username if user else ''}}" required><br>
+                    <input type="text" id="username" name="Username" value="{{user.username if user else ''}}" {{'readonly' if user and user.username}} required><br>
                     <small></small>
                 </div>
                 <div class="form-element">

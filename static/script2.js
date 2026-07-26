@@ -6,12 +6,16 @@ const conPassword=document.getElementById('confirm-password');
 const resultDiv=document.getElementById('endResult')
 const ageCheck=document.getElementById('age')
 const searchBtn=document.getElementById('search_btn')
-usernameCheck.removeAttribute('readonly')
-if (localStorage.getItem('readonlyFlag')==="true"){
-    usernameCheck.setAttribute('readonly','')
-} else{
-    usernameCheck.removeAttribute('readonly')
-}
+
+const formUse=usernameCheck.hasAttribute('readonly')
+
+alert(formUse)
+// usernameCheck.removeAttribute('readonly')
+// if (localStorage.getItem('readonlyFlag')==="true"){
+//     usernameCheck.setAttribute('readonly','')
+// } else{
+//     usernameCheck.removeAttribute('readonly')
+// }
 Form.addEventListener('submit',validator);
 function showError(input,msg){
     const formElement=input.parentElement;
@@ -39,8 +43,7 @@ function validator(e){
     pass=passwordValid(passwordCheck,6,25)
     con=cValid((conPassword))
     ageFlag=validAge(ageCheck,10,80)
-
-    if (user && em && pass && con && ageFlag && localStorage.getItem("readonlyFlag")!=="true"){
+    if (user && em && pass && con && ageFlag && formUse===true){
     username=usernameCheck.value;
     eName=emailCheck.value
     passName=passwordCheck.value
@@ -72,7 +75,7 @@ function validator(e){
                 }
             })
     }
-    else if(user && em && pass && con && ageFlag && localStorage.getItem("readonlyFlag")==="true"){
+    else if(user && em && pass && con && ageFlag && formUse===false){
         // 1. Package the data you want to send in the POST request body
     const payload = {
         email: emailCheck.value,
