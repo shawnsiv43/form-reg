@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <style>
+        body{
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            background-color: palegoldenrod;
+        }
+        tr{
+            display: flex;
+            justify-content: space-between;
+            gap:5px;
+        }
+        th,td{
+            padding: 20px;
+            vertical-align: middle;
+        }
+        .container{
+            padding: 40px;
+            background-color: white;
+            font-family: sans-serif;
+            border-radius: 1.1rem;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+            
+
+        }
+        h1{
+            text-align: center;
+        }
+        .delete_btn{
+            opacity: 0.3;
+            border-radius: 0.5rem;
+            border: hidden;
+            transform:translate(-10px,0px);
+        }
+        .delete_btn:hover{
+            opacity: 0.9;
+            background-color: lightcoral;
+            border: 1px solid lawngreen;
+            color: white;
+        }
+        .train{
+            opacity: 0.3;
+            border-radius: 0.5rem;
+            border: hidden;
+        }
+        .train:hover{
+            opacity: 0.9;
+            color:blue;
+            border:1px solid lightblue;
+            background-color: green;
+        }
+    </style>
+    <div class="container">
+        <h1>User Table</h1>
+        <table>
+            <tr>
+                <th>Username</th>
+                <th>Email</th>
+                <th>Age</th>
+                <th>Password</th>
+                <th>Button</th>
+            </tr>
+            {% for user in users %}
+            <tr>
+                <td>{{user.username}}</td>
+                <td>{{user.email}}</td>
+                <td>{{user.age}}</td>
+                <td>{{user.password}}</td>
+                <td class="ya">
+                    <a onclick="localStorage.setItem('readonlyFlag','true')" href="{{ url_for('update', username=user.username )}}">Edit</a>
+                    <form action="{{ url_for('delete', input2=user.username) }}" method="POST">
+                        <button class="delete_btn" type="submit" onclick="return confirm('Are you sure you want to delete')">Delete</button>
+                    </form>
+                </td>
+            </tr>
+            {% endfor %}
+        </table>
+        <button class="train" onclick="localStorage.setItem('readonlyFlag','false'); window.location.href='http://127.0.0.1:5000/regform'">Add users</button>
+    </div>
+</body>
+</html>
